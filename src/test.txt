@@ -1,0 +1,2 @@
+openUrl https://yandex.ru
+setValue //input[@class="input_input"] | Netcracker
