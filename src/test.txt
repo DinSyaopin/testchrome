@@ -1,2 +1,3 @@
-openUrl https://yandex.ru
-setValue //input[@class="input_input"] | Netcracker
+openUrl https://www.google.com
+setValue //input[@class='gLFyf gsfi'] | Netcracker
+screenShot
