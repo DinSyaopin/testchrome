@@ -42,10 +42,10 @@ public class ActionBuilder {
         //or move it to the tree of folders...
         Random random = new Random();
         int rand = random.nextInt(10000);
-        FileUtils.copyFile(srcFile, new File("C:\\screenshot" + rand + ".png"));
+        FileUtils.copyFile(srcFile, new File("C:\\screenshot\\screenshot" + rand + ".png"));
 
     }
-    public void quit() {
+    void quit() {
         driver.quit();
     }
 
