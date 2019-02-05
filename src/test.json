@@ -1,0 +1,22 @@
+[
+  {
+    "action": "openurl",
+    "params": "https://google.com",
+    "description": "Open Browser"
+  },
+  {
+    "action": "Click",
+    "params": "//input[@class='gLFyf gsfi']",
+    "description": "Click Element"
+  },
+  {
+    "action": "setValue",
+    "params": "//input[@class='gLFyf gsfi'] | Netcracker",
+    "description": "Set Text Value"
+  },
+  {
+    "action": "screenShot",
+    "params": "",
+    "description": "Click Element"
+  }
+]

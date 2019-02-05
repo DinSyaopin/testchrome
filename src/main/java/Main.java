@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Map;
 
 public class Main {
-    private static File file = new File("src/test.xls");
+    private static File file = new File("src/test.json");
 
     public static void main(String[] args) throws Exception {
 
