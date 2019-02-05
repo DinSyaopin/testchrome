@@ -17,6 +17,6 @@
   {
     "action": "screenShot",
     "params": "",
-    "description": "Click Element"
+    "description": "Take screenshot"
   }
 ]

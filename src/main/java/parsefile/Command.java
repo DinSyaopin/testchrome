@@ -1,14 +1,14 @@
 package parsefile;
 
-public class Scenary {
+public class Command {
     private String action;
     private String params;
     private String description;
 
-    public Scenary() {
+    public Command() {
     }
 
-    public Scenary(String action, String params) {
+    public Command(String action, String params) {
         this.action = action;
         this.params = params;
     }
@@ -37,12 +37,5 @@ public class Scenary {
         this.description = description;
     }
 
-    @Override
-    public String toString() {
-        return "Scenary{" +
-                "action='" + action + '\'' +
-                ", params='" + params + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
+
 }

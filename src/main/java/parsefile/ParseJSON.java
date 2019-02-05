@@ -16,8 +16,8 @@ public class ParseJSON implements ParseFile {
         try {
             byte[] jsonData = Files.readAllBytes(file.toPath());
             ObjectMapper mapper = new ObjectMapper();
-            List<Scenary> scenary = mapper.readValue(jsonData, new TypeReference<ArrayList<Scenary>>() {});
-            for (Scenary command:
+            List<Command> scenary = mapper.readValue(jsonData, new TypeReference<ArrayList<Command>>() {});
+            for (Command command:
                  scenary) {
                 commands.put(command.getAction(), command.getParams());
             }
@@ -25,7 +25,7 @@ public class ParseJSON implements ParseFile {
 
         } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+        return null;
     }
 }

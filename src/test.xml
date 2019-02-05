@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<command>
+    <command action="openurl" params="https://google.com" description="Open Browser" />
+    <command action="Click" params="//input[@class='gLFyf gsfi']" description="Click Element" />
+    <command action="setValue" params="//input[@class='gLFyf gsfi'] | Netcracker" description="Set Text Value" />
+    <command action="screenShot" params="" description="Take screenshot" />
+</command>
