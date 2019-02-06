@@ -29,7 +29,6 @@ public class ParseXML implements ParseFile {
                 NamedNodeMap attributes = command.getAttributes();
                 String action = attributes.getNamedItem("action").getNodeValue();
                 String params = attributes.getNamedItem("params").getNodeValue();
-                //String description = attributes.getNamedItem("description").getNodeValue();
                 commands.put(action, params);
             }
             return commands;

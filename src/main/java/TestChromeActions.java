@@ -1,10 +1,9 @@
 import java.io.*;
 import java.util.Map;
 
-public class Main {
-    private static File file = new File("src/test.xml");
+public class TestChromeActions {
 
-    public static void main(String[] args) throws Exception {
+    public static void start(File file) throws Exception {
 
         Map<String, String> scenary = FileExtensionFactory.makeScenaryFrom(file);
 

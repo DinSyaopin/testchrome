@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 public class FirstTest {
+    /*
     private static WebDriver driver;
 
     private static String url = "http://www.google.com/";
@@ -43,4 +44,5 @@ public class FirstTest {
     public static void tearDown() {
         driver.quit();
     }
+    */
 }
