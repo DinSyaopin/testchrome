@@ -1,29 +1,30 @@
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
 public class ActionBuilder {
 
-    //String value;
-    private WebDriver driver;
+    private EventFiringWebDriver eventWebDriver;
     {
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
-        driver = new ChromeDriver();
+        eventWebDriver = new EventFiringWebDriver(new ChromeDriver());
+        EventListener listener = new EventListener();
+        eventWebDriver.register(listener);
     }
 
     @Action(action = "openurl", arg = "", aliases = {"openSite, openURL"})
     void openurl(String arg) {
-        driver.get(arg);
+        eventWebDriver.get(arg);
     }
 
     @Action(action = "click", arg = "", aliases = "")
     void click(String arg) {
-        WebElement element = driver.findElement(By.xpath(arg));
+        WebElement element = eventWebDriver.findElement(By.xpath(arg));
         element.click();
     }
 
@@ -31,25 +32,23 @@ public class ActionBuilder {
     void setValueInField(String arg) {
         String predicate = arg.substring(0, arg.indexOf('|') - 1);
         String enteredText = arg.substring(arg.indexOf('|') + 1);
-        WebElement element = driver.findElement(By.xpath(predicate));
+        WebElement element = eventWebDriver.findElement(By.xpath(predicate));
         element.sendKeys(enteredText);
     }
 
     @Action(action = "screenshot", arg = "", aliases = "screen")
     void doScreenshot(String arg) throws IOException {
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        //should think about correct naming of screenshot
-        //or move it to the tree of folders...
+        File srcFile = ((TakesScreenshot) eventWebDriver).getScreenshotAs(OutputType.FILE);
         Random random = new Random();
         int rand = random.nextInt(10000);
         FileUtils.copyFile(srcFile, new File("C:\\screenshot\\screenshot" + rand + ".png"));
 
     }
     void quit() {
-        driver.quit();
+        eventWebDriver.quit();
     }
 
-    public void setDriver(WebDriver driver) {
-        this.driver = driver;
+    public void setEventWebDriver(EventFiringWebDriver eventWebDriver) {
+        this.eventWebDriver = eventWebDriver;
     }
 }
