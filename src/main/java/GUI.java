@@ -7,6 +7,11 @@ public class GUI {
     private static File file;
 
     public static void main(String[] args) {
+        // TODO add 5 commands to the scenary
+        // TODO add javadoc?
+        // TODO add reading info from log file to the textarea?
+        // TODO fix no error message if close window immediately
+
         JFrame frame = new JFrame("Test Chrome Actions");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 350);
@@ -15,29 +20,33 @@ public class GUI {
 
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("File");
-        JMenu menu1 = new JMenu("Help");
-        JMenuItem item = new JMenuItem("Open");
-        JMenuItem item1 = new JMenuItem("Save as");
-        menu.add(item);
-        menu.add(item1);
+        JMenuItem close = new JMenuItem("Close");
+        //JMenu menu1 = new JMenu("Help");
+        //JMenuItem item = new JMenuItem("Open");
+        //JMenuItem item1 = new JMenuItem("Save as");
+        //menu.add(item);
+        //menu.add(item1);
+        menu.add(close);
         menuBar.add(menu);
-        menuBar.add(menu1);
+        //menuBar.add(menu1);
 
         JPanel panel = new JPanel();
         JTextArea textArea = new JTextArea("Log:");
+        textArea.setRows(18);
         JButton findFile = new JButton("Find file");
         JButton test = new JButton("Test");
         panel.add(findFile);
         panel.add(test);
 
         frame.getContentPane().add(BorderLayout.NORTH, menuBar);
-        frame.getContentPane().add(BorderLayout.PAGE_END, textArea);
+        frame.getContentPane().add(BorderLayout.CENTER, textArea);
         frame.getContentPane().add(BorderLayout.PAGE_END, panel);
 
         frame.setVisible(true);
 
         //Listeners part
         findFile.addActionListener(e -> findFile());
+        close.addActionListener(e -> System.exit(0));
 
         test.addActionListener(e -> {
             try {

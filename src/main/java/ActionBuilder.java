@@ -13,8 +13,9 @@ public class ActionBuilder {
     {
         System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         eventWebDriver = new EventFiringWebDriver(new ChromeDriver());
-        EventListener listener = new EventListener();
-        eventWebDriver.register(listener);
+        eventWebDriver.manage().window().maximize();
+        eventWebDriver.manage().deleteAllCookies();
+        eventWebDriver.register(new EventListener());
     }
 
     @Action(action = "openurl", arg = "", aliases = {"openSite, openURL"})
