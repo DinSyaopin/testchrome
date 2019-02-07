@@ -7,10 +7,11 @@ public class GUI {
     private static File file;
 
     public static void main(String[] args) {
-        // TODO add 5 commands to the scenary
         // TODO add javadoc?
         // TODO add reading info from log file to the textarea?
         // TODO fix no error message if close window immediately
+        // TODO Chrome not reachable after first start of test. Need to find a trouble.
+        // TODO Find bug of queue of commands in scenary. Need to fix.
 
         JFrame frame = new JFrame("Test Chrome Actions");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

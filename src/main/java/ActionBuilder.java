@@ -1,4 +1,6 @@
 import org.apache.commons.io.FileUtils;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
@@ -8,6 +10,9 @@ import java.io.IOException;
 import java.util.Random;
 
 public class ActionBuilder {
+
+    private static final Logger LOGGER = LogManager.getLogger(ActionBuilder.class);
+
 
     private EventFiringWebDriver eventWebDriver;
     {
@@ -25,8 +30,12 @@ public class ActionBuilder {
 
     @Action(action = "click", arg = "", aliases = "")
     void click(String arg) {
-        WebElement element = eventWebDriver.findElement(By.xpath(arg));
-        element.click();
+        try {
+            WebElement element = eventWebDriver.findElement(By.xpath(arg));
+            element.click();
+        } catch (NoSuchElementException ex) {
+            LOGGER.error("ABCD", ex);
+        }
     }
 
     @Action(action = "setvalue", arg = "", aliases = "set")
