@@ -20,3 +20,23 @@ The minimum requirements is that you've installed jre1.8.0_201 or higher version
 >Screenshots that was created during the tests puts to app directory with pattern *"screen"+"dd.MM.yy"+".png"*.
 
 -5.You can return to step 2 and go on or close app simply push exit button or *close* item of menu.  
+
+# Supported test commands
+Look at the test.xml example:
+      
+      <?xml version="1.0" encoding="utf-8" ?>
+      <command>
+          <command action="openurl" params="https://google.com" description="Open Browser" />
+          <command action="Click" params="//input[@class='gLFyf gsfi']" description="Click Element" />
+          <command action="setValue" params="//input[@class='gLFyf gsfi'] | Netcracker" description="Set Text Value" />
+          <command action="Click" params="//div[@class='VlcLAe']//input[@name='btnK']" description="Click Search Button" />
+          <command action="Click" params="(//div[@class='g'])[1]//div[@class='r']/a[1]" description="Click First Result" />
+          <command action="screenShot" params="" description="Take screenshot" />
+      </command>
+     
+App implemented four types of action: *openurl*, *click*, *setvalue*, *screenshot*. Register doesn't matter.  
+
+*Params* attribute of action *openurl* should consists of url.  
+*Params* attribute of action *click* should consists of Xpath request.
+*Params* attribute of action *setvalue* should consists of "xpath request" + '|' + "some text".
+*Params* attribute of action *screenshot* ignored.
