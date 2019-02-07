@@ -19,7 +19,7 @@ The minimum requirements is that you've installed jre1.8.0_201 or higher version
 >Logging information saves in the app directory with pattern *"./logs/app-%d{yyyy-MM-dd}.log"* as well as in textarea of app.  
 >Screenshots that was created during the tests puts to app directory with pattern *"screen"+"dd.MM.yy"+".png"*.
 
--5.You can return to step 2 and go on or close app simply push exit button or *close* item of menu.  
+-5.You can return to step 2 and go on or close app with simply pushing exit button or *close* item of menu.  
 
 # Supported test commands
 Look at the test.xml example:
