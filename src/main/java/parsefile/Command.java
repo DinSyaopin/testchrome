@@ -13,6 +13,12 @@ public class Command {
         this.params = params;
     }
 
+    public Command(String action, String params, String description) {
+        this.action = action;
+        this.params = params;
+        this.description = description;
+    }
+
     public String getAction() {
         return action;
     }
@@ -37,5 +43,12 @@ public class Command {
         this.description = description;
     }
 
-
+    @Override
+    public String toString() {
+        return "Command{" +
+                "action='" + action + '\'' +
+                ", params='" + params + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
 }

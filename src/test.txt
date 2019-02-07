@@ -1,6 +1,6 @@
 openUrl https://www.google.com
-Click //input[@class='gLFyf gsfi'] Click Element
-Click //[@class='FPdoLc VlcLAe']/input[@name='btnK'] Click Search Button
-Click /html/body/div[1]/div[3]/form/div[2]/div/div[2]/div[2]/div/center/input[1] Click First Result
+Click //input[@class='gLFyf gsfi']
 setValue //input[@class='gLFyf gsfi'] | Netcracker
+Click //div[@class='VlcLAe']//input[@name='btnK']
+Click (//div[@class='g'])[1]//div[@class='r']/a[1]
 screenShot

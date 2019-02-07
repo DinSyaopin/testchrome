@@ -1,21 +1,30 @@
+import parsefile.Command;
+
 import java.io.*;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class TestChromeActions {
 
+    private static CommandListener commandListener;
+
     public static void start(File file) throws Exception {
 
-        Map<String, String> scenary = FileExtensionFactory.makeScenaryFrom(file);
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
 
-        CommandListener commandListener = new CommandListener();
+        ArrayList<Command> scenary = FileExtensionFactory.makeScenaryFrom(file);
 
-        for (Map.Entry<String, String> command:
-             scenary.entrySet()) {
-            Message message = new Message(command);
-            commandListener.onMessageReceived(message);
-            Thread.sleep(500);
+         commandListener = new CommandListener();
+
+        for (Command command :
+                scenary) {
+            commandListener.onCommandReceived(command);
+            Thread.sleep(1000);
         }
+    }
 
-        commandListener.quit();
+    public static void stop() {
+        if (commandListener != null) {
+            commandListener.quit();
+        }
     }
 }

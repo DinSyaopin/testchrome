@@ -1,3 +1,5 @@
+import parsefile.Command;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -20,15 +22,15 @@ public class CommandListener {
             }
         }
     }
-    public void onMessageReceived(Message message) throws NullPointerException, IllegalAccessException, InvocationTargetException {
-        String action = message.action.toLowerCase();
-        String arg = message.arg;
+    public void onCommandReceived(Command command) throws NullPointerException, IllegalAccessException, InvocationTargetException {
+        String action = command.getAction().toLowerCase();
+        String params = command.getParams();
 
         Method method = actions.get(action);
         if (method == null) System.out.println("Имя метода не найдено");
 
         Action act = method.getAnnotation(Action.class);
-        method.invoke(actionBuilder, arg);
+        method.invoke(actionBuilder, params);
     }
 
     public void quit() {

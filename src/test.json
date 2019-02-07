@@ -16,12 +16,12 @@
   },
   {
     "action": "Click",
-    "params": "//[@class='FPdoLc VlcLAe']/input[@name='btnK']",
+    "params": "//div[@class='VlcLAe']//input[@name='btnK']",
     "description": "Click Search Button"
   },
   {
     "action": "Click",
-    "params": "/html/body/div[1]/div[3]/form/div[2]/div/div[2]/div[2]/div/center/input[1]",
+    "params": "(//div[@class='g'])[1]//div[@class='r']/a[1]",
     "description": "Click First Result"
   },
   {

@@ -1,25 +1,22 @@
-import parsefile.ParseJSON;
-import parsefile.ParseTXT;
-import parsefile.ParseXLS;
-import parsefile.ParseXML;
+import parsefile.*;
 
 import java.io.File;
-import java.util.Map;
+import java.util.ArrayList;
 
 public class FileExtensionFactory {
 
-    public static Map<String, String> makeScenaryFrom(File file) throws Exception {
+    public static ArrayList<Command> makeScenaryFrom(File file) throws Exception {
         String extension = getFileExtension(file);
 
         switch (extension) {
             case "xls":
-                return new ParseXLS().parseFile(file);
+                return new ParsingXls().parseFile(file);
             case "json":
-                return new ParseJSON().parseFile(file);
+                return new ParsingJson().parseFile(file);
             case "xml":
-                return new ParseXML().parseFile(file);
+                return new ParsingXml().parseFile(file);
             case "txt":
-                return new ParseTXT().parseFile(file);
+                return new ParsingTxt().parseFile(file);
             default:
                 throw new Exception("Can't read type of file.");
         }

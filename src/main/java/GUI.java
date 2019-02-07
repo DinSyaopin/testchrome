@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 
 public class GUI {
@@ -11,9 +13,9 @@ public class GUI {
         // TODO add reading info from log file to the textarea?
         // TODO fix no error message if close window immediately
         // TODO Chrome not reachable after first start of test. Need to find a trouble.
-        // TODO Find bug of queue of commands in scenary. Need to fix.
 
         JFrame frame = new JFrame("Test Chrome Actions");
+        Window window = new Window(frame);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 350);
         frame.setResizable(false);
@@ -47,7 +49,10 @@ public class GUI {
 
         //Listeners part
         findFile.addActionListener(e -> findFile());
-        close.addActionListener(e -> System.exit(0));
+        close.addActionListener(e -> {
+            TestChromeActions.stop();
+            System.exit(0);
+        });
 
         test.addActionListener(e -> {
             try {
@@ -59,6 +64,13 @@ public class GUI {
                 }
             } catch (Exception e1) {
                 e1.printStackTrace();
+            }
+        });
+        frame.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                TestChromeActions.stop();
+                System.exit(0);
             }
         });
     }

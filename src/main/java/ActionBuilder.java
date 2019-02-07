@@ -15,8 +15,8 @@ public class ActionBuilder {
 
 
     private EventFiringWebDriver eventWebDriver;
+
     {
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
         eventWebDriver = new EventFiringWebDriver(new ChromeDriver());
         eventWebDriver.manage().window().maximize();
         eventWebDriver.manage().deleteAllCookies();
@@ -54,11 +54,8 @@ public class ActionBuilder {
         FileUtils.copyFile(srcFile, new File("C:\\screenshot\\screenshot" + rand + ".png"));
 
     }
+
     void quit() {
         eventWebDriver.quit();
-    }
-
-    public void setEventWebDriver(EventFiringWebDriver eventWebDriver) {
-        this.eventWebDriver = eventWebDriver;
     }
 }
