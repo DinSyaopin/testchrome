@@ -13,6 +13,7 @@ public class Controller{
 
     private MainView view;
     private TestChromeActions testChromeActions;
+    private String webDriverFileName;
 
     public Controller(MainView view, TestChromeActions testChromeActions) {
         this.view = view;
@@ -22,11 +23,12 @@ public class Controller{
     public void initController() {
 
         view.getFindFileButton().addActionListener(e -> findFile());
+        view.getFindDriverNameButton().addActionListener(e -> findDriverName());
 
         view.getTestButton().addActionListener(e -> {
             try {
                 if (file != null) {
-                    runTestChromeActions(file);
+                    runTestChromeActions(file, webDriverFileName);
 
                 } else {
                     JOptionPane.showMessageDialog(view.getFrame(), "No file selected!", "Error", JOptionPane.ERROR_MESSAGE);
@@ -37,17 +39,24 @@ public class Controller{
         });
 
         view.getCloseItem().addActionListener(e -> {
-            TestChromeActions.stop();
             System.exit(0);
         });
 
         view.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                TestChromeActions.stop();
                 System.exit(0);
             }
         });
+    }
+
+    private void findDriverName() {
+        JFileChooser fileChooser = new JFileChooser();
+        int choose = fileChooser.showDialog(null, "Choose file");
+        if (choose == JFileChooser.APPROVE_OPTION) {
+            file = fileChooser.getSelectedFile();
+        }
+        webDriverFileName = file.getAbsolutePath();
     }
 
     private void findFile() {
@@ -57,8 +66,8 @@ public class Controller{
             file = fileChooser.getSelectedFile();
         }
     }
-    private void runTestChromeActions(File file) throws Exception {
-        TestChromeActions.start(file);
+    private void runTestChromeActions(File file, String webDriverFileName) throws Exception {
+        TestChromeActions.start(file, webDriverFileName);
     }
 
 }

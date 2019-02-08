@@ -7,27 +7,19 @@ import java.util.ArrayList;
 
 public class TestChromeActions {
 
-    private static CommandListener commandListener;
+    public static void start(File file, String webDriverFileName) throws Exception {
 
-    public static void start(File file) throws Exception {
-
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", webDriverFileName);
 
         ArrayList<Command> scenary = FileExtensionFactory.makeScenaryFrom(file);
 
-         commandListener = new CommandListener();
+         CommandListener commandListener = new CommandListener();
 
         for (Command command :
                 scenary) {
             commandListener.onCommandReceived(command);
             Thread.sleep(1000);
         }
-        stop();
-    }
-
-    public static void stop() {
-        if (commandListener != null) {
-            commandListener.quit();
-        }
+        commandListener.quit();
     }
 }

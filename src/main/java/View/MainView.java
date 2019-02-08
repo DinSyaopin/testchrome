@@ -11,6 +11,7 @@ public class MainView {
     private JButton findFileButton;
     private JButton testButton;
     private JPanel panel;
+    private JButton findDriverNameButton;
 
     public MainView() {
 
@@ -21,10 +22,12 @@ public class MainView {
         menuBar.add(menu);
 
         textArea = new JTextArea("Log:",18, 18);
+        findDriverNameButton = new JButton("Find driver");
         findFileButton = new JButton("Find file");
         testButton = new JButton("Test");
 
         panel = new JPanel();
+        panel.add(findDriverNameButton);
         panel.add(findFileButton);
         panel.add(testButton);
         panel.add(new JScrollPane(textArea));
@@ -100,5 +103,13 @@ public class MainView {
 
     public void setTestButton(JButton testButton) {
         this.testButton = testButton;
+    }
+
+    public JButton getFindDriverNameButton() {
+        return findDriverNameButton;
+    }
+
+    public void setFindDriverNameButton(JButton findDriverNameButton) {
+        this.findDriverNameButton = findDriverNameButton;
     }
 }

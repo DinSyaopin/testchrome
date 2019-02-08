@@ -5,6 +5,10 @@ import Model.parsefile.*;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * This class defines extension of scenary file
+ * and then send this file to appropriate parser.
+ */
 public class FileExtensionFactory {
 
     public static ArrayList<Command> makeScenaryFrom(File file) throws Exception {

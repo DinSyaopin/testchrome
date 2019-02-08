@@ -12,10 +12,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
+/**
+ * This class store itself methods for handling actions
+ * from test files.
+ */
 public class ActionRepository {
 
     private Logger logger = LogManager.getLogger(ActionRepository.class);
-
 
     private WebDriver webDriver;
 
