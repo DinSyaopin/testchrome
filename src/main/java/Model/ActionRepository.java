@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class ActionRepository {
 
@@ -24,24 +25,27 @@ public class ActionRepository {
         webDriver.manage().deleteAllCookies();
     }
 
-    @Action(action = "openurl", arg = "", aliases = {"openSite, openURL"})
-    void openurl(String arg) {
+    @Action(action = "openurl", params = "", desc = "", aliases = {"openSite, openURL"})
+    void openUrl(String params, String desc) {
         try {
-            logger.info("Try to open url: " + arg);
-            webDriver.get(arg);
-            logger.info(arg + " was opened");
+            if (desc == null) {
+                logger.info("Try to open a site");
+            } else logger.info(desc + " " + params);
+            webDriver.get(params);
+            logger.info(params + " was opened");
         } catch (WebDriverException ex) {
             logger.error(ex.getCause());
             quit();
         }
-
     }
 
-    @Action(action = "click", arg = "", aliases = "")
-    void click(String arg) {
+    @Action(action = "click", params = "", desc = "", aliases = "")
+    void click(String params, String desc) {
         try {
-            logger.info("Try to click element by xpath: " + arg);
-            WebElement element = webDriver.findElement(By.xpath(arg));
+            if (desc == null) {
+                logger.info("Try to click element");
+            } else logger.info(desc + " " + params);
+            WebElement element = webDriver.findElement(By.xpath(params));
             logger.info(element + " was found");
             element.click();
             logger.info(element + " was clicked");
@@ -57,12 +61,15 @@ public class ActionRepository {
         }
     }
 
-    @Action(action = "setvalue", arg = "", aliases = "set")
-    void setValueInField(String arg) {
+    @Action(action = "setvalue", params = "", desc = "", aliases = "set")
+    void setValueInField(String params, String desc) {
         try {
-            logger.info("Try to set value to the field by xpath: " + arg);
-            String predicate = arg.substring(0, arg.indexOf('|') - 1);
-            String enteredText = arg.substring(arg.indexOf('|') + 1);
+            if (desc == null) {
+                logger.info("Try to set value to the text field");
+            } else logger.info(desc + " " + params);
+
+            String predicate = params.substring(0, params.indexOf('|') - 1);
+            String enteredText = params.substring(params.indexOf('|') + 1);
             WebElement element = webDriver.findElement(By.xpath(predicate));
             logger.info(element + " was found");
             element.sendKeys(enteredText);
@@ -79,14 +86,16 @@ public class ActionRepository {
         }
     }
 
-    @Action(action = "screenshot", arg = "", aliases = "screen")
-    void doScreenshot(String arg){
+    @Action(action = "screenshot", params = "", desc = "", aliases = "screen")
+    void doScreenshot(String params, String desc){
         try {
-            logger.info("Try to take screenshot from browser's window");
+            if (desc == null) {
+                logger.info("Try to take screenshot");
+            } else logger.info(desc);
             File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             logger.info("Screenshot was created. Try to save it to filesystem");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
-            String pathName = "screen" + dateFormat.format(new Date()) + ".png";
+            String pathName = "screen" + new Random().nextInt(100) + "_" + dateFormat.format(new Date()) + ".png";
             FileUtils.copyFile(srcFile, new File(pathName));
             logger.info("Screenshot was saved");
         } catch (WebDriverException | IOException ex) {

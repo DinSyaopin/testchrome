@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class FileExtensionFactory {
 
     public static ArrayList<Command> makeScenaryFrom(File file) throws Exception {
+
         String extension = getFileExtension(file);
 
         switch (extension) {

@@ -3,4 +3,4 @@ Click //input[@class='gLFyf gsfi']
 setValue //input[@class='gLFyf gsfi'] | Netcracker
 Click //div[@class='VlcLAe']//input[@name='btnK']
 Click (//div[@class='g'])[1]//div[@class='r']/a[1]
-screenShot
+screenShot Take screenshot

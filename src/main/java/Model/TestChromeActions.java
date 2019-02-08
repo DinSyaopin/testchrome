@@ -22,6 +22,7 @@ public class TestChromeActions {
             commandListener.onCommandReceived(command);
             Thread.sleep(1000);
         }
+        stop();
     }
 
     public static void stop() {

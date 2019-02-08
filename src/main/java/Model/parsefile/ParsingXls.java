@@ -20,10 +20,11 @@ public class ParsingXls extends ParsingFile {
 
         while (rowIterator.hasNext()) {
             Row row = rowIterator.next();
-            String cell0 = row.getCell(0).getStringCellValue();
-            String cell1 = row.getCell(1).getStringCellValue();
-            if (!cell0.equals("Action") && !cell0.isEmpty()) {
-                    commands.add(new Command(cell0, cell1));
+            String action = row.getCell(0).getStringCellValue();
+            String params = row.getCell(1).getStringCellValue();
+            String desc = row.getCell(2).getStringCellValue();
+            if (!action.equals("Action") && !params.isEmpty()) {
+                    commands.add(new Command(action, params, desc));
             }
         }
         return commands;

@@ -30,7 +30,8 @@ public class ParsingXml extends ParsingFile {
                 NamedNodeMap attributes = command.getAttributes();
                 String action = attributes.getNamedItem("action").getNodeValue();
                 String params = attributes.getNamedItem("params").getNodeValue();
-                commands.add(new Command(action, params));
+                String description = attributes.getNamedItem("description").getNodeValue();
+                commands.add(new Command(action, params, description));
             }
 
         } catch (ParserConfigurationException e) {

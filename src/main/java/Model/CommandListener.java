@@ -10,10 +10,10 @@ import java.util.Map;
 public class CommandListener {
 
     private static final Map<String, Method> actions = new HashMap<>();
-    private static final ActionRepository ACTION_REPOSITORY = new ActionRepository();
+    private static final ActionRepository actionRepository = new ActionRepository();
 
     static {
-        for (Method m : ACTION_REPOSITORY.getClass().getDeclaredMethods()) {
+        for (Method m : actionRepository.getClass().getDeclaredMethods()) {
             if (m.isAnnotationPresent(Action.class)) {
                 Action action = m.getAnnotation(Action.class);
                 actions.put(action.action(), m);
@@ -27,15 +27,14 @@ public class CommandListener {
     public void onCommandReceived(Command command) throws NullPointerException, IllegalAccessException, InvocationTargetException {
         String action = command.getAction().toLowerCase();
         String params = command.getParams();
-
+        String desc = command.getDescription();
         Method method = actions.get(action);
-        if (method == null) System.out.println("Имя метода не найдено");
 
         Action act = method.getAnnotation(Action.class);
-        method.invoke(ACTION_REPOSITORY, params);
+        method.invoke(actionRepository, params, desc);
     }
 
     public void quit() {
-        ACTION_REPOSITORY.quit();
+        actionRepository.quit();
     }
 }

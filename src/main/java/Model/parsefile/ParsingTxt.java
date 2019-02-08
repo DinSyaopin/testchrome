@@ -15,10 +15,13 @@ public class ParsingTxt extends ParsingFile {
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         String line = bufferedReader.readLine();
 
+        // TODO do desc
         while (line != null) {
             if (line.contains(" ")) {
                 int indexOfSpace = line.indexOf(' ');
-                commands.add(new Command(line.substring(0, indexOfSpace), line.substring(indexOfSpace)));
+                String action = line.substring(0, indexOfSpace);
+                String params = line.substring(indexOfSpace + 1);
+                commands.add(new Command(action, params));
                 line = bufferedReader.readLine();
             } else {
                 commands.add(new Command(line, null));

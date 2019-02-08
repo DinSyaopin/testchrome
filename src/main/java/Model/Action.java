@@ -9,6 +9,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 public @interface Action {
     String action();
-    String arg();
+    String params();
+    String desc();
     String[] aliases();
 }
