@@ -13,14 +13,16 @@ import java.util.ArrayList;
 public class ParsingXml extends ParsingFile {
 
     @Override
-    public ArrayList<Command> parseFile(File file) {
-        commands = new ArrayList<>();
+    public ArrayList<Command> parseFile(File file) throws IOException {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder;
+        Document document;
         try {
-            DocumentBuilder builder = factory.newDocumentBuilder();
+            builder = factory.newDocumentBuilder();
 
-            Document document = builder.parse(file);
+            document = builder.parse(file);
+
             NodeList commandElements = document.getDocumentElement().getElementsByTagName("command");
 
             for (int i = 0; i < commandElements.getLength(); i++) {
@@ -30,14 +32,13 @@ public class ParsingXml extends ParsingFile {
                 String params = attributes.getNamedItem("params").getNodeValue();
                 commands.add(new Command(action, params));
             }
-            return commands;
+
         } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
             e.printStackTrace();
         } catch (SAXException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return commands;
     }
 }

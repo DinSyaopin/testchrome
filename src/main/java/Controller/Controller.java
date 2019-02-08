@@ -9,7 +9,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 
 public class Controller{
-    File file;
+    private File file;
 
     private MainView view;
     private TestChromeActions testChromeActions;
