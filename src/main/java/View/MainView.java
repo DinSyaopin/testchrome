@@ -1,13 +1,13 @@
 package View;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class MainView {
     private JFrame frame;
     private JMenuBar menuBar;
     private JMenu menu;
     private JMenuItem closeItem;
-    private JTextArea textArea;
     private JButton findFileButton;
     private JButton testButton;
     private JPanel panel;
@@ -21,21 +21,19 @@ public class MainView {
         menu.add(closeItem);
         menuBar.add(menu);
 
-        textArea = new JTextArea("Log:",18, 18);
         findDriverNameButton = new JButton("Find driver");
         findFileButton = new JButton("Find file");
         testButton = new JButton("Test");
 
         panel = new JPanel();
-        panel.add(findDriverNameButton);
-        panel.add(findFileButton);
-        panel.add(testButton);
-        panel.add(new JScrollPane(textArea));
+        panel.add(findDriverNameButton, BorderLayout.WEST);
+        panel.add(findFileButton, BorderLayout.CENTER);
+        panel.add(testButton, BorderLayout.EAST);
 
         frame = new JFrame("ChromeTestApp");
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 350);
+        frame.setSize(250, 150);
         frame.setResizable(false);
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
@@ -79,14 +77,6 @@ public class MainView {
 
     public void setCloseItem(JMenuItem closeItem) {
         this.closeItem = closeItem;
-    }
-
-    public JTextArea getTextArea() {
-        return textArea;
-    }
-
-    public void setTextArea(JTextArea textArea) {
-        this.textArea = textArea;
     }
 
     public JButton getFindFileButton() {

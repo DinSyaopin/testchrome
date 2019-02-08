@@ -12,12 +12,10 @@ public class Controller{
     private File file;
 
     private MainView view;
-    private TestChromeActions testChromeActions;
     private String webDriverFileName;
 
-    public Controller(MainView view, TestChromeActions testChromeActions) {
+    public Controller(MainView view) {
         this.view = view;
-        this.testChromeActions = testChromeActions;
     }
 
     public void initController() {
@@ -27,7 +25,7 @@ public class Controller{
 
         view.getTestButton().addActionListener(e -> {
             try {
-                if (file != null) {
+                if (file != null && webDriverFileName != null) {
                     runTestChromeActions(file, webDriverFileName);
 
                 } else {
@@ -55,8 +53,8 @@ public class Controller{
         int choose = fileChooser.showDialog(null, "Choose file");
         if (choose == JFileChooser.APPROVE_OPTION) {
             file = fileChooser.getSelectedFile();
+            webDriverFileName = file.getAbsolutePath();
         }
-        webDriverFileName = file.getAbsolutePath();
     }
 
     private void findFile() {
