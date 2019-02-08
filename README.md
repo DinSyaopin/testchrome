@@ -13,13 +13,16 @@ The minimum requirements is that you've installed jre1.8.0_201 or higher version
 
 >File decoration must match to examples in app directory.  
 
--4.Click button **Test**.  
+-4.Click button **Find driver**
+>Find chromedriver.exe in your filesystem and choose it.
+
+-5.Click button **Test**.  
 
 >New chrome window will be opened. Then should be done some actions on a browser and in the end browser will be closed.  
 >Logging information saves in the app directory with pattern *"./logs/app-%d{yyyy-MM-dd}.log"* as well as in textarea of app.  
 >Screenshots that was created during the tests puts to app directory with pattern *"screen"+"dd.MM.yy"+".png"*.
 
--5.You can return to step 2 and go on or close app with simply pushing exit button or *close* item of menu.  
+-6.You can return to step 2 and go on or close app with simply pushing exit button or *close* item of menu.  
 
 # Supported test commands
 Look at the test.xml example:
