@@ -1,4 +1,4 @@
-package parsefile;
+package Model.parsefile;
 
 import java.io.BufferedReader;
 import java.io.File;

@@ -1,4 +1,4 @@
-package parsefile;
+package Model.parsefile;
 
 public class Command {
     private String action;

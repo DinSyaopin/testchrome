@@ -1,4 +1,4 @@
-package parsefile;
+package Model.parsefile;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;

@@ -1,4 +1,4 @@
-package parsefile;
+package Model.parsefile;
 
 import java.io.File;
 import java.util.ArrayList;
