@@ -91,7 +91,7 @@ public class ActionRepository {
             File srcFile = ((TakesScreenshot) webDriver).getScreenshotAs(OutputType.FILE);
             logger.info("Screenshot was created. Try to save it to filesystem");
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yy");
-            String pathName = "screen" + new Random().nextInt(100) + "_" + dateFormat.format(new Date()) + ".png";
+            String pathName = "screen" + dateFormat.format(new Date()) + ".png";
             FileUtils.copyFile(srcFile, new File(pathName));
             logger.info("Screenshot was saved");
         } catch (WebDriverException | IOException ex) {
