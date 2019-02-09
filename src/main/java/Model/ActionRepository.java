@@ -4,7 +4,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,15 +17,9 @@ import java.util.Random;
  */
 public class ActionRepository {
 
-    private Logger logger = LogManager.getLogger(ActionRepository.class);
+    private static final Logger logger = LogManager.getLogger(ActionRepository.class);
 
     private WebDriver webDriver;
-
-    {
-        webDriver = new ChromeDriver();
-        webDriver.manage().window().maximize();
-        webDriver.manage().deleteAllCookies();
-    }
 
     @Action(action = "openurl", params = "", desc = "", aliases = {"openSite, openURL"})
     void openUrl(String params, String desc) {
@@ -37,7 +30,7 @@ public class ActionRepository {
             webDriver.get(params);
             logger.info(params + " was opened");
         } catch (WebDriverException ex) {
-            logger.error(ex.getCause());
+            logger.error(ex.getMessage());
             quit();
         }
     }
@@ -109,5 +102,13 @@ public class ActionRepository {
 
     void quit() {
         webDriver.quit();
+    }
+
+    public WebDriver getWebDriver() {
+        return webDriver;
+    }
+
+    public void setWebDriver(WebDriver webDriver) {
+        this.webDriver = webDriver;
     }
 }

@@ -1,12 +1,19 @@
 package Controller;
 
-import Model.TestChromeActions;
+import Model.ActionRepository;
+import Model.CommandListener;
+import Model.FileExtensionFactory;
+import Model.parsefile.Command;
 import View.MainView;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class Controller{
     private File file;
@@ -21,14 +28,15 @@ public class Controller{
     public void initController() {
 
         view.getFindFileButton().addActionListener(e -> findFile());
+
         view.getFindDriverNameButton().addActionListener(e -> findDriverName());
 
         view.getTestButton().addActionListener(e -> {
             try {
                 if (file != null && webDriverFileName != null) {
-                    runTestChromeActions(file, webDriverFileName);
-
-                } else {
+                    start();
+                }
+                else {
                     JOptionPane.showMessageDialog(view.getFrame(), "No file selected!", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             } catch (Exception e1) {
@@ -36,9 +44,7 @@ public class Controller{
             }
         });
 
-        view.getCloseItem().addActionListener(e -> {
-            System.exit(0);
-        });
+        view.getCloseItem().addActionListener(e -> System.exit(0));
 
         view.getFrame().addWindowListener(new WindowAdapter() {
             @Override
@@ -64,8 +70,35 @@ public class Controller{
             file = fileChooser.getSelectedFile();
         }
     }
-    private void runTestChromeActions(File file, String webDriverFileName) throws Exception {
-        TestChromeActions.start(file, webDriverFileName);
-    }
 
+    private void start() throws Exception {
+
+        //получаем список команд
+        ArrayList<Command> scenary = FileExtensionFactory.makeScenaryFrom(file);
+
+        //устанавливаем связь с драйвером
+        System.setProperty("webdriver.chrome.driver", webDriverFileName);
+
+        //инициализируем драйвер
+        WebDriver webDriver = new ChromeDriver();
+        webDriver.manage().window().maximize();
+        webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        webDriver.manage().deleteAllCookies();
+
+        //инициализируем репозиторий
+        ActionRepository repository = new ActionRepository();
+
+        //передаем в репозиторий ссылку на инициализированный драйвер
+        repository.setWebDriver(webDriver);
+        //теперь для каждого экземпляра command нужно вызвать метод
+        CommandListener commandListener = new CommandListener();
+        commandListener.setRepository(repository);
+        commandListener.bindAnnotationToMethod();
+
+        for (Command command :
+                scenary) {
+            commandListener.onCommandReceived(command);
+        }
+        commandListener.quit();
+    }
 }
