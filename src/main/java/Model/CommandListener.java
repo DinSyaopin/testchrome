@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class provides transferring current comand from test scenary to
+ * This class provides transfer of current comand from test scenary to
  * appropriate method in class ActionRepository.
  */
 public class CommandListener {

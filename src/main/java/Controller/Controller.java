@@ -44,8 +44,6 @@ public class Controller{
             }
         });
 
-        view.getCloseItem().addActionListener(e -> System.exit(0));
-
         view.getFrame().addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -73,32 +71,25 @@ public class Controller{
 
     private void start() throws Exception {
 
-        //получаем список команд
         ArrayList<Command> scenary = FileExtensionFactory.makeScenaryFrom(file);
 
-        //устанавливаем связь с драйвером
         System.setProperty("webdriver.chrome.driver", webDriverFileName);
 
-        //инициализируем драйвер
         WebDriver webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
         webDriver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         webDriver.manage().deleteAllCookies();
 
-        //инициализируем репозиторий
         ActionRepository repository = new ActionRepository();
 
-        //передаем в репозиторий ссылку на инициализированный драйвер
         repository.setWebDriver(webDriver);
-        //теперь для каждого экземпляра command нужно вызвать метод
+
         CommandListener commandListener = new CommandListener();
         commandListener.setRepository(repository);
         commandListener.bindAnnotationToMethod();
 
-        for (Command command :
-                scenary) {
-            commandListener.onCommandReceived(command);
-        }
+        for (Command command : scenary) commandListener.onCommandReceived(command);
+
         commandListener.quit();
     }
 }

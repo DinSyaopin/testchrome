@@ -65,7 +65,7 @@ public class ActionRepository {
             } else logger.info(desc + " " + params);
 
             String predicate = params.substring(0, params.indexOf('|') - 1);
-            String enteredText = params.substring(params.indexOf('|') + 1);
+            String enteredText = params.substring(params.indexOf('|') + 2);
             WebElement element = webDriver.findElement(By.xpath(predicate));
             logger.info(element + " was found");
             element.sendKeys(enteredText);
